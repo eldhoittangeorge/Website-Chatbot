@@ -12,6 +12,8 @@ BOT_NAME = 'SiteCrawler'
 SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
+LOG_LEVEL = "INFO"
+
 # FEED_FORMAT = "json"
 # FEED_URI = "./myfile.json" 
 
