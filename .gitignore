@@ -1,7 +1,7 @@
 .ipynb_checkpoints/*
 .DS_Store
 
-Site Data/*
+# Site Data/*
 
 # For pytorch models
 *.pt
