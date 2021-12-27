@@ -1,6 +1,6 @@
 .ipynb_checkpoints/*
 .DS_Store
-
+*.ipynb_checkpoints
 # Site Data/*
 
 # For pytorch models
