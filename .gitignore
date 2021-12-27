@@ -3,6 +3,9 @@
 
 Site Data/*
 
+# For pytorch models
+*.pt
+
 #Scrapy
 /.vagrant
 /scrapy.iml
