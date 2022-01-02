@@ -4,6 +4,10 @@
 learn.ipynb
 # Site Data/*
 
+Models/Context Models/mlruns
+Models/Context Models/Data/*
+*.db
+
 # For pytorch models
 *.pt
 
