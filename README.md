@@ -12,6 +12,7 @@ We propose a ROBERTa based model for creating a chatbot. The proposed system can
 - pytorch
 - scrapy
 - transformers
+- farm-haystack
 
 ## Usage
 ### 1. Web Crawler
@@ -23,7 +24,8 @@ scrapy crawl MitsSpider
 The site data will be stored in Website-Chatbot/Site Data/
 
 ### 2. Context Evaluation Model 
-Run the notebook Website-Chatbot/Models/Context Evaluation Model/Model.ipynb
+Run the notebook Website-Chatbot/Models/Context Evaluation Model/Model 2.ipynb <br/>The current implementation doesn't use crawled website data for answering question. The data used is game of thrones wiki data.
+
 
 ### 3. Non Context Model 
 Run the notebook Website-Chatbot/Models/Non Context Model/Model.ipynb
