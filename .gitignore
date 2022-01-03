@@ -2,7 +2,8 @@
 .DS_Store
 *.ipynb_checkpoints
 learn.ipynb
-# Site Data/*
+Site Data/Data/*
+*.txt
 
 Models/Context Models/mlruns
 Models/Context Models/Data/*

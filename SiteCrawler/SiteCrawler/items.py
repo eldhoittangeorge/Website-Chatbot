@@ -6,6 +6,6 @@ class SitecrawlerItem(scrapy.Item):
     url = scrapy.Field()
     # heading = scrapy.Field()
 
-class SitecrawlerTableItem(scrapy.Item):
-    key = scrapy.Field()
-    value = scrapy.Field()
+# class SitecrawlerTableItem(scrapy.Item):
+#     key = scrapy.Field()
+#     value = scrapy.Field()

@@ -3,13 +3,13 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
 from SiteCrawler.items import SitecrawlerItem
 
-class DataSpider(Spider):
+class DataSpider(CrawlSpider):
     name = "MitsSpider"
     allowed_domains = ['mgmits.ac.in']
-    # start_urls = ["http://mgmits.ac.in/"]
-    start_urls = ["http://mgmits.ac.in/infrastructure/hostel/"]
+    start_urls = ["http://mgmits.ac.in/"]
+    # start_urls = ["http://mgmits.ac.in/infrastructure/hostel/"]
 
-    # rules = (Rule(LinkExtractor(), callback="parse"),)
+    rules = (Rule(LinkExtractor(), callback="parse"),)
 
 
     def parse_home(self, response):
@@ -26,7 +26,6 @@ class DataSpider(Spider):
         return None
 
 
-
     def parse(self,response):
         content = SitecrawlerItem() 
         if(response.url == "http://mgmits.ac.in/"):
@@ -36,5 +35,5 @@ class DataSpider(Spider):
         else:
             content["data"] = response.xpath('//p/text()[not(ancestor::*[@class="header" or @class = "footer-link-wrap" or @class="footer-wrap"])] | //h1/text() | //h2/text() | //li/text()').extract()
             content['url'] = response.url
-            # self.logger.info(content)
+            # self.logger.info(f"The current crawling url is {response.url}")
             yield content
