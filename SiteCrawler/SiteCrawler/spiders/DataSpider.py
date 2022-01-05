@@ -1,13 +1,12 @@
-from scrapy import Spider
+from bs4 import BeautifulSoup
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
-from SiteCrawler.items import SitecrawlerItem
+from SiteCrawler.items import SitecrawlerItem,SitecrawlerTableItem
 
 class DataSpider(CrawlSpider):
     name = "MitsSpider"
     allowed_domains = ['mgmits.ac.in']
     start_urls = ["http://mgmits.ac.in/"]
-    # start_urls = ["http://mgmits.ac.in/infrastructure/hostel/"]
 
     rules = (Rule(LinkExtractor(), callback="parse"),)
 
@@ -19,11 +18,32 @@ class DataSpider(CrawlSpider):
         content['url'] = response.url+"home"
         return content 
 
+
+    def html_filter(self, css_class): 
+       return css_class != "follow-us-on"
+
     def parse_table(self, response):
-        self.logger.info("A table was found")
-        table = response.xpath("//table").extract()
-        self.logger.info(table) 
-        return None
+        # self.logger.info("A table was found")
+        site_table_item = SitecrawlerTableItem()
+        soup = BeautifulSoup(response.text, "lxml")
+        title = soup.find("span", class_="has-vivid-red-color")
+        title = title.get_text() if (title != None) else soup.find("h2").get_text() 
+        # print(title)
+        # if(title == "No"):
+        #     print(response.url)
+        table = soup.find("table", class_= self.html_filter)
+        table_df = list() 
+        if(not table):
+            return None
+        for row in table.findAll("tr"):
+            cells = row.findAll("td")
+            temp_row = list()
+            for cell in cells:
+                temp_row.append(cell.get_text())
+            table_df.append(temp_row)
+        site_table_item["table_data"] = table_df
+        site_table_item["table_title"] = title
+        return site_table_item
 
 
     def parse(self,response):
@@ -35,5 +55,4 @@ class DataSpider(CrawlSpider):
         else:
             content["data"] = response.xpath('//p/text()[not(ancestor::*[@class="header" or @class = "footer-link-wrap" or @class="footer-wrap"])] | //h1/text() | //h2/text() | //li/text()').extract()
             content['url'] = response.url
-            # self.logger.info(f"The current crawling url is {response.url}")
             yield content
