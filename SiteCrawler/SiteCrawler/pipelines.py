@@ -31,19 +31,19 @@ class SitecrawlerPipeline:
         return len(data) > 3
 
     def write_data(self, item):
-        # file_name = "mits_" + re.sub("https?://mgmits.ac.in/", "", item['url'])
-        # file_name = re.sub("/","_",file_name) 
+        file_name = "mits_" + re.sub("https?://mgmits.ac.in/", "", item['url'])
+        file_name = re.sub("/","_",file_name) 
         site_content = " ".join(item["data"])
-        self.data = self.data.append({"data" :site_content, "url":item["url"]}, ignore_index=True)
+        # self.data = self.data.append({"data" :site_content, "url":item["url"]}, ignore_index=True)
 
 
-        # with open(f"../Site Data/{file_name}.txt","w",encoding="utf-8") as fp:
+        with open(f"../Site Data/Data/{file_name}.txt","w+",encoding="utf-8") as fp:
         # with open(f"../Site Data/data.txt","a", encoding="utf-8") as fp:
-        #     fp.write(item["url"]+"\n")
-        #     fp.write(site_content)
+            # fp.write(item["url"]+"\n")
+            fp.write(site_content)
 
-    def close_spider(self, spider):
-        self.data.to_csv("../Site Data/data.csv", index=False)
+    # def close_spider(self, spider):
+    #     self.data.to_csv("../Site Data/data.csv", index=False)
 
 
     def process_item(self, item, spider):
