@@ -1,19 +1,14 @@
 import pandas as pd
 import re
-from itemadapter import ItemAdapter
 from SiteCrawler.items import SitecrawlerTableItem, SitecrawlerItem
 
 class SitecrawlerTablePipeline:
 
-    # def filter_data(self, data):
-    #     for item in data:
-
     def save_data(self, data):
         df = pd.DataFrame.from_records(data["table_data"], index=None)
         df = df[df.apply(lambda x: any(x.values != ""), axis=1)]
-        print(f"The shape of {data['table_title']} is {df.size}")
         if(df.size != 0):
-            df.to_csv(f"../Site Data/{data['table_title']}.csv", index=False, header=False)
+            df.to_csv(f"../Site Data/Tables/{data['table_title']}.csv", index=False, header=False)
 
 
     def process_item(self, item, spider):

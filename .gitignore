@@ -3,6 +3,7 @@
 *.ipynb_checkpoints
 learn.ipynb
 Site Data/Data/*
+Site Data/Tables/*
 *.txt
 
 Models/Context Models/mlruns
