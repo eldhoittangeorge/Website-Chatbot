@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route("/api")
+@app.route("/api",methods=["POST"])
 def test():
-    return "Hello, World!" 
+    return f"Hello, World! {request.form['one']}" 
