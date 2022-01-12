@@ -6,13 +6,9 @@ from haystack.pipelines import ExtractiveQAPipeline
 
 document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
 
-# doc_dir = "Data/article_txt_got"
-# s3_url = "https://s3.eu-central-1.amazonaws.com/deepset.ai-farm-qa/datasets/documents/wiki_gameofthrones_txt.zip"
-# fetch_archive_from_http(url=s3_url, output_dir=doc_dir)
-
-doc_dir = "../../Site Data/Data"
-dicts = convert_files_to_dicts(dir_path=doc_dir,split_paragraphs=True)
-document_store.write_documents(dicts)
+# doc_dir = "../../Site Data/Data"
+# dicts = convert_files_to_dicts(dir_path=doc_dir,split_paragraphs=True)
+# document_store.write_documents(dicts)
 
 retriever = DensePassageRetriever(document_store=document_store,
                                  query_embedding_model='facebook/dpr-question_encoder-single-nq-base',
