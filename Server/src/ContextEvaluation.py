@@ -1,3 +1,4 @@
+import time
 import torch
 from joblib import load
 from transformers import DistilBertTokenizer, DistilBertModel
@@ -6,9 +7,13 @@ from transformers import DistilBertTokenizer, DistilBertModel
 class ContextEvalutaionClass():
 
     def __init__(self) -> None:
+        start = time.time() 
         self.model_name = "distilbert-base-uncased"
         self.tokenizer = DistilBertTokenizer.from_pretrained(self.model_name)
         self.model = DistilBertModel.from_pretrained(self.model_name)
+        self.pretrained_model = load('src/Saved Models/context_evaluation_model.joblib')
+        end = time.time()
+        print(f"the total elapsed time in constructor is {end - start}")
 
     def mean_pooling(self, model_output, attention_mask):
         token_embeddings = model_output[0]
@@ -23,13 +28,16 @@ class ContextEvalutaionClass():
         return embedding.numpy()
 
     def predict(self, data):
-        model = load("context_evaluation_model.joblib")
+        # start = time.time()
+        # model = load("context_evaluation_model.joblib")
         embedding = self.create_embedding([data])
-        prediction = model.predict(embedding)[0]
+        prediction = self.pretrained_model.predict(embedding)[0]
+        # end = time.time()
+        # print(f"The total elapsed time in prediction is {end - start}")
         return prediction
 
 
-context_evaluation_model = ContextEvalutaionClass()
-result = context_evaluation_model.predict("What is the name of the hod")
-print(result)
+# context_evaluation_model = ContextEvalutaionClass()
+# result = context_evaluation_model.predict("What is the name of the hod")
+# print(result)
     
