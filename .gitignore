@@ -7,8 +7,12 @@ Site Data/Tables/*
 *.txt
 
 Models/Context Models/mlruns
+Server/mlruns
 Models/Context Models/Data/*
-*.db
+Server/src/mlruns/*
+Server/src/context_model/*
+Server/src/Saved Models/context_model/*
+
 
 # For pytorch models
 *.pt
