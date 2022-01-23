@@ -8,6 +8,7 @@ class ContextEvalutaionClass():
 
     def __init__(self) -> None:
         start = time.time() 
+        print(f"The start time is {start}")
         self.model_name = "distilbert-base-uncased"
         self.tokenizer = DistilBertTokenizer.from_pretrained(self.model_name)
         self.model = DistilBertModel.from_pretrained(self.model_name)

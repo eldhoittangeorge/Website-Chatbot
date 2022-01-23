@@ -8,11 +8,12 @@ class NonContextModelClass():
 
     def __init__(self) -> None:
         start = time.time()
-        self.model_name = "sentence-transformers/paraphrase-albert-small-v2"
-        self.data = pd.read_csv("src/Saved Models/data.csv") 
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModel.from_pretrained(self.model_name)
-        self.dataset_embedding = torch.load('src/Saved Models/chitchat_dataset_embedding.pt')
+        print(f"The non context start time is {start}")
+        self.model_path = "Saved Models/paraphrase-albert-small-v2/"
+        self.data = pd.read_csv("Saved Models/data.csv") 
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_path)
+        self.model = AutoModel.from_pretrained(self.model_path)
+        self.dataset_embedding = torch.load('Saved Models/chitchat_dataset_embedding.pt')
         end = time.time()
         print(f"The total elapsed time for constructor is {end - start}")
 
@@ -43,7 +44,7 @@ class NonContextModelClass():
 
 
 
-# non_context_model = NonContextModelClass()
-# output = non_context_model.predict("Where are you from")
-# print(output)
+non_context_model = NonContextModelClass()
+output = non_context_model.predict("Where are you from")
+print(output)
 
