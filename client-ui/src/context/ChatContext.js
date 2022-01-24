@@ -6,9 +6,24 @@ export const ChatContext = createContext();
 
 const ChatProvider = ({ children }) => {
   const initState = {
-    te: "Test data in context",
     question: "one",
-    answere: "",
+    answers: [
+      {
+        answer: "Ernakulam",
+        context:
+          "ering (CSE) at the Muthoot Institute of Technology and Science (MITS), Ernakulam! As you glance through the faculty profile, I am sure that you will a",
+      },
+      {
+        answer: "Puthencruz",
+        context:
+          "Department profile Muthoot Institute of Technology and Science (MITS) Puthencruz was established in May 2013 and started its academic program in Augus",
+      },
+      {
+        answer: "Kochi",
+        context:
+          "pal Muthoot Institute of Technology & Science Varikoli P.O., Puthencruz, Kochi – 682308, Ernakulam District. Ph.0484 – 2732100, 2732111, 2733011 Fax:",
+      },
+    ],
   };
 
   const [chatState, dispatch] = useReducer(ChatReducer, initState);
