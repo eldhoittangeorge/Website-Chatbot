@@ -14,8 +14,17 @@ class ContextModelClass():
         
     def predict(self, query):
         prediction = self.pipeline.run(query=query)
-        return prediction
+        answers = []
+        for answer in prediction['answers']:
+            tmp = dict()
+            tmp["document_link"] = answer.meta["name"]
+            tmp["result"] = answer.answer
+            tmp["context"] = answer.context
+            answers.append(tmp)
+
+        return {"query":prediction["query"], "answers":answers}
     
         
 # context_model = ContextModelClass()
-# context_model.predict("Where are you from")
+# prediction = context_model.predict("Where are you from")
+# print_answers(prediction)

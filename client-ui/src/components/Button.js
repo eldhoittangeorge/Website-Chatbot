@@ -3,10 +3,12 @@ import React, { useContext } from "react";
 import { ChatContext } from "../context/ChatContext";
 
 function Button(props) {
-  const { data, addData } = useContext(ChatContext);
+  const { data, addData, getAnswer } = useContext(ChatContext);
 
   const handleClick = () => {
-    addData(":Hello");
+    console.log("Clicked")
+    getAnswer(data.question)
+    addData("");
   };
 
   const { label } = props;
