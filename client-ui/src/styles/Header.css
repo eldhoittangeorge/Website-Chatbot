@@ -1,0 +1,16 @@
+.heading {
+  font-size: 37px;
+  /* font-family: "Source Sans Pro", sans-serif; */
+  font-weight: 700;
+  color: rgb(49, 51, 63);
+}
+
+.text {
+  /* font-family: "Source Sans Pro", sans-serif; */
+  color: rgb(49, 51, 63);
+  font-size: 16px;
+}
+
+.noteText {
+  font-size: 14px;
+}

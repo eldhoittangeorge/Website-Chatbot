@@ -1,13 +1,16 @@
 import React from "react";
 import Button from "./Button";
 import "../styles/UserInput.css";
-import TextField from "./TextField";
+import QueryInput from "./QueryInput";
 
 const UserInput = () => {
   return (
-    <div className="container">
-      <TextField />
-      <Button label="Send" />
+    <div className="userInputContainer">
+      <QueryInput />
+      <div className="buttonContainer">
+        <Button label="Run" />
+        <Button label="Clear Question" />
+      </div>
     </div>
   );
 };

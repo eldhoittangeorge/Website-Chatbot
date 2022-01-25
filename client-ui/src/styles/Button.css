@@ -1,3 +1,15 @@
 .button {
-  /* flex-grow: 3; */
+  background-color: white;
+  border: 2px solid rgb(240, 240, 255);
+  border-radius: 5px;
+  color: rgb(49, 51, 63);
+  /* font-family: "Source Sans Pro", sans-serif; */
+  padding: 8px 16px;
+  flex: 1;
+}
+
+.button:hover {
+  border: 2px solid rgb(7, 71, 192);
+  color: rgb(7, 71, 192);
+  cursor: pointer;
 }

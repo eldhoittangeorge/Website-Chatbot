@@ -1,0 +1,15 @@
+input[type="text"] {
+  background-color: rgb(236, 238, 244);
+  border-radius: 5px;
+  border-width: 0px;
+  font-size: 14px;
+  padding: 16px;
+  /* font-family: "Source Sans Pro", sans-serif; */
+}
+
+::placeholder {
+  color: black;
+}
+
+input[type="text"]:focus {
+}

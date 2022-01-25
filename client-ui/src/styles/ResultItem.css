@@ -1,0 +1,22 @@
+.resultItemContainer {
+  display: flex;
+  margin: 16px;
+  width: 50%;
+  border-radius: 5px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+hr.solid {
+  border: 0px;
+  border-top: 1px solid #bbb;
+  width: 100%;
+  border-radius: 5px;
+}
+
+p.resultItem {
+  text-align: justify;
+  margin: 0;
+  font-family: "Helvetica Neue";
+}
