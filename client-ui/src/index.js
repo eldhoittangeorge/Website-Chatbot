@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/index.css";
+import "./fonts/Rubik/Rubik-Regular.ttf";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ChatContext from "./context/ChatContext";

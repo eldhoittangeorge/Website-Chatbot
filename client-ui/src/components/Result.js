@@ -5,19 +5,15 @@ import { ChatContext } from "../context/ChatContext";
 const Result = () => {
   const { data } = useContext(ChatContext);
 
-  if (data.answers == null) {
-    return "";
-  } else {
-    const resultList = data.answers.map((result) => (
-      <ResultItem result={result} />
+    const resultList = data.answers.map((result, index) => (
+      <ResultItem result={result} key={index} />
     ));
     return (
       <>
-        <h2>Result</h2>
+        { data.answers.length !== 0 ? <h2>Result</h2> : null}
         {resultList}
       </>
     );
-  }
 };
 
 export default Result;

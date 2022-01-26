@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { ChatContext } from "../context/ChatContext";
-import TextField from "@mui/material/TextField";
 import "../styles/QueryInput.css";
 
 const QueryInput = () => {
