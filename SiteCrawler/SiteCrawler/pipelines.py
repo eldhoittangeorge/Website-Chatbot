@@ -1,5 +1,7 @@
 import pandas as pd
+import logging
 import re
+import os
 from SiteCrawler.items import SitecrawlerTableItem, SitecrawlerItem
 
 class SitecrawlerTablePipeline:
@@ -8,7 +10,7 @@ class SitecrawlerTablePipeline:
         df = pd.DataFrame.from_records(data["table_data"], index=None)
         df = df[df.apply(lambda x: any(x.values != ""), axis=1)]
         if(df.size != 0):
-            df.to_csv(f"../Site Data/Tables/{data['table_title']}.csv", index=False, header=False)
+            df.to_csv(f"../../../Site Data/Tables/{data['table_title']}.csv", index=False, header=False)
 
 
     def process_item(self, item, spider):
@@ -20,7 +22,7 @@ class SitecrawlerTablePipeline:
 class SitecrawlerPipeline:
 
     def __init__(self):
-        self.data = pd.DataFrame(columns=["data", "url"])
+        self.data = pd.DataFrame(columns=["filename", "url"])
 
     def clean_data(self, data):
         data = data.strip()
@@ -34,16 +36,17 @@ class SitecrawlerPipeline:
         file_name = "mits_" + re.sub("https?://mgmits.ac.in/", "", item['url'])
         file_name = re.sub("/","_",file_name) 
         site_content = " ".join(item["data"])
-        # self.data = self.data.append({"data" :site_content, "url":item["url"]}, ignore_index=True)
+        self.data = self.data.append({"filename" :file_name, "url":item["url"]}, ignore_index=True)
+        logging.info(f"The current workding directory is {os.getcwd()}")
 
 
-        with open(f"../Site Data/Data/{file_name}.txt","w+",encoding="utf-8") as fp:
+        with open(f"../../../Site Data/Data/{file_name}.txt","w+",encoding="utf-8") as fp:
         # with open(f"../Site Data/data.txt","a", encoding="utf-8") as fp:
             # fp.write(item["url"]+"\n")
             fp.write(site_content)
 
-    # def close_spider(self, spider):
-    #     self.data.to_csv("../Site Data/data.csv", index=False)
+    def close_spider(self, spider):
+            self.data.to_csv("../../../Site Data/file_to_url_mapping.csv", index=False)
 
 
     def process_item(self, item, spider):
