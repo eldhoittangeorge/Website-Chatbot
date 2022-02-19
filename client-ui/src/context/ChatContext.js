@@ -28,15 +28,17 @@ const ChatProvider = ({ children }) => {
 
   const clearAllData = () => {
     dispatch({
-      type:"CLEAR_ALL_DATA",
-    })
-  }
+      type: "CLEAR_ALL_DATA",
+    });
+  };
 
   const getAnswer = async (query) => {
     try {
       const response = await axios.get("http://127.0.0.1:5000/api", {
         params: { query: query },
       });
+      console.log("THe data inside context", response.data);
+      clearAllData();
       addData(response.data);
     } catch (error) {
       console.log(error);

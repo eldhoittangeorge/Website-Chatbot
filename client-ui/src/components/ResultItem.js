@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/ResultItem.css";
 
 const ResultItem = (props) => {
-  const { result, context, document_link } = props.result;
+  const { result, context, source } = props.result;
   return (
     <div className="resultItemContainer">
       <p className="resultItem">
@@ -12,7 +12,10 @@ const ResultItem = (props) => {
         <b>Context</b>:{context}
       </p>
       <p className="resultItem">
-        <b>Source</b>: <a href={document_link}>{document_link}</a>
+        <b>Source</b>:{" "}
+        <a target={"_blank"} href={source}>
+          {source}
+        </a>
       </p>
       <hr className="solid" />
     </div>
