@@ -9,6 +9,9 @@
 
 BOT_NAME = 'SiteCrawler'
 
+MONGODB_URI = 'mongodb://localhost:27017'
+MONGODB_DATABASE = 'Website_Chatbot'
+
 SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
