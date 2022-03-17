@@ -7,8 +7,8 @@ class ContextModelClass():
     
     def __init__(self):
         self.reader = FARMReader(model_name_or_path="src/Saved Models/roberta_base_squad2", use_gpu=True, num_processes=0)
-        self.document_store = FAISSDocumentStore.load("src/Saved Models/model")
-        self.retriever = DensePassageRetriever.load("src/Saved Models/context_model", self.document_store)
+        self.document_store = FAISSDocumentStore.load("src/Saved Models/document_store")
+        self.retriever = DensePassageRetriever.load("src/Saved Models/context_model_retriever_2", self.document_store)
         self.pipeline = ExtractiveQAPipeline(self.reader, self.retriever)
         
         
@@ -17,7 +17,7 @@ class ContextModelClass():
         answers = []
         for answer in prediction['answers']:
             tmp = dict()
-            tmp["document_link"] = answer.meta["name"]
+            tmp["document_id"] = answer.document_id
             tmp["result"] = answer.answer
             tmp["context"] = answer.context
             answers.append(tmp)
@@ -26,5 +26,5 @@ class ContextModelClass():
     
         
 # context_model = ContextModelClass()
-# prediction = context_model.predict("Where are you from")
-# print_answers(prediction)
+# prediction = context_model.predict("Where is MITS located?")
+# print(prediction)

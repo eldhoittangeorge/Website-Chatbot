@@ -7,12 +7,14 @@ Site Data/Tables/*
 *.txt
 
 Models/Context Models/mlruns
+Models/Context Models/context_model_retriever_2/*
 Models/Context Models/Saved Models/*
 Server/mlruns
 Models/Context Models/Data/*
 Server/src/mlruns/*
 Server/src/context_model/*
 Server/src/Saved Models/context_model/*
+Server/src/Saved Models/context_model_retriever_2/*
 Server/src/Saved Models/roberta_base_squad2/*
 Server/src/Saved Models/paraphrase-albert-small-v2/*
 Testing/
