@@ -17,6 +17,9 @@ NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
 LOG_LEVEL = "INFO"
 
+
+DEPTH_LIMIT = 5
+
 # FEED_FORMAT = "json"
 # FEED_URI = "./myfile.json" 
 
@@ -71,7 +74,6 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'SiteCrawler.pipelines.SitecrawlerPipeline': 300,
-   'SiteCrawler.pipelines.SitecrawlerTablePipeline':400
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
