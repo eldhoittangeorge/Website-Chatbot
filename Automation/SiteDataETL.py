@@ -13,15 +13,16 @@ class DataETL:
         self.collection = self.db[config.CRAWLER_NAME]
 
     def clean_data(self, data):
-        data = " ".join(data)
         data = data.strip()
-        # data = re.sub("\xa0|\n|\|", "", data)
+        data = re.sub("\xa0|\n|\|", "", data)
+        # data = [x for x in data if x]
         return data
 
 
     def write_data_db(self, data):
-        # logging.info("The data is heer") 
-        content = self.clean_data(data["data"])
+        content = list(map(self.clean_data, data["data"])) 
+        content = [x for x in content if x]
+        content = " ".join(content)
         url = data["url"]
 
         if(sys.getsizeof(content) <= 3000):
@@ -40,9 +41,9 @@ class DataETL:
             }
         }
 
-        print(f"The data is {content}")
+        # print(f"The data is {content}")
 
-        # self.collection.update_one(document, update=update, upsert=True)
+        self.collection.update_one(document, update=update, upsert=True)
 
 
 

@@ -1,5 +1,6 @@
 from py import process
 import scrapy 
+import re
 import config
 import logging
 from SiteDataETL import DataETL
@@ -22,11 +23,9 @@ class DataSpider(CrawlSpider):
 
 
     def parse(self, response):
-        print(response.text)
-        data = response.xpath('//p/text() | //h1/text() | //h2/text() | //b/text() | //a/text()').extract()
+        data = response.xpath('//p/text() | //dd/text() | //b/text() | //a/text() | //li/text()').extract()
         url = response.url
-        # self.data_etl.write_data_db({"data" : data, "url" : url}) 
-        # logging.info(url)
+        self.data_etl.write_data_db({"data" : data, "url" : url}) 
         yield {}
 
 
