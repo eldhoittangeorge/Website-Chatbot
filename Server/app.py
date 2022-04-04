@@ -52,3 +52,7 @@ def give_answer():
 
 
 #TODO if there is no link found return the home page from spider
+
+
+# if __name__ == '__main__':
+#     app.run(host="0.0.0.0")

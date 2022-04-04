@@ -18,6 +18,8 @@ Server/src/Saved Models/context_model_retriever_2/*
 Server/src/Saved Models/roberta_base_squad2/*
 Server/src/Saved Models/paraphrase-albert-small-v2/*
 Testing/
+Automation/mlruns
+Automation/context_model_retriever/*
 
 
 # For pytorch models
