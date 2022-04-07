@@ -1,8 +1,6 @@
 from py import process
 import scrapy 
-import re
 import config
-import logging
 from SiteDataETL import DataETL
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.crawler import CrawlerProcess
@@ -12,6 +10,7 @@ from scrapy.linkextractors import LinkExtractor
 class DataSpider(CrawlSpider):
 
     def __init__(self, *args, **kwargs):
+        print("Collect data started")
         super(DataSpider, self).__init__(*args, **kwargs)
         self.data_etl = DataETL()
 
@@ -30,11 +29,11 @@ class DataSpider(CrawlSpider):
 
 
 
-process = CrawlerProcess(settings={
-    "DEPTH_LIMIT":1,
-    "LOG_LEVEL" : "INFO"
-})
+# process = CrawlerProcess(settings={
+#     "DEPTH_LIMIT":1,
+#     "LOG_LEVEL" : "INFO"
+# })
 
-process.crawl(DataSpider)
-process.start()
+# process.crawl(DataSpider)
+# process.start()
 

@@ -8,6 +8,7 @@ const ChatProvider = ({ children }) => {
   const initState = {
     question: "",
     answers: [],
+    config: { name: "" },
   };
 
   const [chatState, dispatch] = useReducer(ChatReducer, initState);
@@ -15,6 +16,13 @@ const ChatProvider = ({ children }) => {
   const addData = (data) => {
     dispatch({
       type: "ADD_DATA",
+      payload: data,
+    });
+  };
+
+  const addConfigData = (data) => {
+    dispatch({
+      type: "ADD_CONFIG_DATA",
       payload: data,
     });
   };
@@ -45,6 +53,16 @@ const ChatProvider = ({ children }) => {
     }
   };
 
+  const getConfigData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:5000/config");
+      console.log("The config data is ", response.data);
+      addConfigData(response.data);
+    } catch (error) {
+      console.log("The error in config is ", error.message);
+    }
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -53,6 +71,7 @@ const ChatProvider = ({ children }) => {
         writeQuestion,
         clearAllData,
         getAnswer,
+        getConfigData,
       }}
     >
       {children}

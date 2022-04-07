@@ -13,8 +13,7 @@ class ModelCreator():
         print("Initailization started")
         self.client = MongoClient(config.MONGODB_URI)
         self.db = self.client[config.MONOGODB_DATABASE]
-        # self.collection = self.db[config.CRAWLER_NAME]
-        self.collection = self.db["MitsSpider"]
+        self.collection = self.db[config.CRAWLER_NAME]
         self.documents = self.load_documents()
         self.document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
         self.pipeline = None
@@ -45,6 +44,8 @@ class ModelCreator():
         self.reader = FARMReader(model_name_or_path="../Models/Context Models/Saved Models/roberta_base_squad2/", use_gpu=True,
             num_processes=0)        
 
+        print("Reader initialized")
+
         self.retriever = DensePassageRetriever(document_store=self.document_store,
             query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
             passage_embedding_model='facebook/dpr-ctx_encoder-single-nq-base',
@@ -54,6 +55,8 @@ class ModelCreator():
             use_gpu=True,
             embed_title=True,
             use_fast_tokenizers=True)
+
+        print("Retriever initialized")
         self.document_store.update_embeddings(self.retriever)
 
         self.pipeline = ExtractiveQAPipeline(reader=self.reader, retriever=self.retriever) 
@@ -67,7 +70,7 @@ class ModelCreator():
         self.document_store.save("document_store")        
         print("Model saving ended")
 
-if __name__ == '__main__':
-    model_creator = ModelCreator()
-    model_creator.create_and_save()
+# if __name__ == '__main__':
+#     model_creator = ModelCreator()
+#     model_creator.create_and_save()
 

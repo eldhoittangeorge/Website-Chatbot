@@ -1,8 +1,13 @@
-CRAWLER_NAME = "OnePiece"
+CRAWLER_NAME = "MITS"
 CRAWLER_CONFIG = {
-    "name" : "OnePiece", 
-    "allowed_domains" : ['onepiece.fandom.com'],
-    "start_urls" : ['https://onepiece.fandom.com/wiki/One_Piece_Wiki']
+    "name" : "MITS", 
+    "allowed_domains" : ['mgmits.ac.in'],
+    "start_urls" : ['https://www.mgmits.ac.in/']
+}
+
+CRAWLER_SETTINGS = {
+    "DEPTH_LIMIT":1,
+    "LOG_LEVEL": "INFO"
 }
 
 MONGODB_URI = "mongodb://localhost:27017"

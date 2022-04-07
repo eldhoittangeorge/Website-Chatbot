@@ -1,6 +1,5 @@
-from haystack.utils import print_answers
 from haystack.document_stores import FAISSDocumentStore
-from haystack.nodes import DensePassageRetriever, FARMReader, TransformersReader
+from haystack.nodes import DensePassageRetriever, FARMReader
 from haystack.pipelines import ExtractiveQAPipeline
 
 class ContextModelClass():
@@ -25,6 +24,6 @@ class ContextModelClass():
         return {"query":prediction["query"], "answers":answers}
     
         
-context_model = ContextModelClass()
-prediction = context_model.predict("Where is MITS located?")
-print(prediction)
+# context_model = ContextModelClass()
+# prediction = context_model.predict("Where is MITS located?")
+# print(prediction)

@@ -1,14 +1,16 @@
 import "./styles/App.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Header from "./components/Header";
 import { ChatContext } from "./context/ChatContext";
 import UserInput from "./components/UserInput";
 import Result from "./components/Result";
 
 function App() {
-  const { data, getAnswer } = useContext(ChatContext);
+  const { getConfigData } = useContext(ChatContext);
 
-  // console.log(getAnswer());
+  useEffect(() => {
+    getConfigData();
+  }, []);
 
   return (
     <div className="App">

@@ -7,6 +7,8 @@ export const ChatReducer = (state, action) => {
       return { ...state, question: action.payload };
     case "CLEAR_ALL_DATA":
       return { ...state, question: "", answers: [] };
+    case "ADD_CONFIG_DATA":
+      return { ...state, config: action.payload };
     default:
       return state;
   }
