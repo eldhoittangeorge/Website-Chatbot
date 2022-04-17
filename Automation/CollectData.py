@@ -22,7 +22,8 @@ class DataSpider(CrawlSpider):
 
 
     def parse(self, response):
-        data = response.xpath('//p/text() | //dd/text() | //b/text() | //a/text() | //li/text()').extract()
+        # data = response.xpath('//p/text() | //h1/text() | //h2/text() | //b/text() | //a/text()').extract()
+        data = response.xpath('//p/text()').extract()
         url = response.url
         self.data_etl.write_data_db({"data" : data, "url" : url}) 
         yield {}

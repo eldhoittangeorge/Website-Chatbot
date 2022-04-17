@@ -41,23 +41,23 @@ class ModelCreator():
     def create_retriever_reader(self):
         print("Model creation started")
         self.document_store.write_documents(self.documents)
-        self.reader = FARMReader(model_name_or_path="../Models/Context Models/Saved Models/roberta_base_squad2/", use_gpu=True,
-            num_processes=0)        
-
-        print("Reader initialized")
 
         self.retriever = DensePassageRetriever(document_store=self.document_store,
             query_embedding_model="facebook/dpr-question_encoder-single-nq-base",
             passage_embedding_model='facebook/dpr-ctx_encoder-single-nq-base',
-            max_seq_len_passage=256,
+            max_seq_len_passage=512,
             max_seq_len_query=64,
             batch_size=16,
             use_gpu=True,
             embed_title=True,
-            use_fast_tokenizers=True)
-
+            use_fast_tokenizers=True,
+            similarity_function="cosine")
         print("Retriever initialized")
         self.document_store.update_embeddings(self.retriever)
+
+        self.reader = FARMReader(model_name_or_path="../Models/Context Models/Saved Models/roberta_base_squad2/", use_gpu=True,
+            num_processes=0)        
+        print("Reader initialized")
 
         self.pipeline = ExtractiveQAPipeline(reader=self.reader, retriever=self.retriever) 
         print("Model creation ended")

@@ -12,6 +12,7 @@ class ContextModelClass():
         
         
     def predict(self, query):
+        query = query.lower()
         prediction = self.pipeline.run(query=query)
         answers = []
         for answer in prediction['answers']:

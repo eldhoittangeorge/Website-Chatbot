@@ -5,6 +5,9 @@ learn.ipynb
 Site Data/Data/*
 Site Data/Tables/*
 *.txt
+*.db
+*.json
+document_store
 
 Models/Context Models/mlruns
 Models/Context Models/context_model_retriever_2/*

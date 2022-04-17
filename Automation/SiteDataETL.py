@@ -15,8 +15,7 @@ class DataETL:
     def clean_data(self, data):
         data = data.strip()
         data = re.sub("\xa0|\n|\|", "", data)
-        # data = [x for x in data if x]
-        return data
+        return data.lower()
 
 
     def write_data_db(self, data):
@@ -41,7 +40,6 @@ class DataETL:
             }
         }
 
-        # print(f"The data is {content}")
 
         self.collection.update_one(document, update=update, upsert=True)
 
