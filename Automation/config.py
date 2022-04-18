@@ -2,7 +2,7 @@ CRAWLER_NAME = "MITS"
 CRAWLER_CONFIG = {
     "name" : "MITS", 
     "allowed_domains" : ['mgmits.ac.in'],
-    "start_urls" : ['http://mgmits.ac.in']
+    "start_urls" : ['http://www.mgmits.ac.in/']
 }
 
 CRAWLER_SETTINGS = {

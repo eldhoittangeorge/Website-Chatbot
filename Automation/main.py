@@ -1,7 +1,9 @@
+from dataclasses import dataclass
 import config
 from scrapy.crawler import CrawlerProcess
 from CollectData import DataSpider
 from CreateModel import ModelCreator
+from CleanData import CleanData
 
 class Main():
 
@@ -17,8 +19,12 @@ class Main():
     def start(self):
         self.crawler.crawl(DataSpider)
         self.crawler.start()
-
         print("Data collection ended")
+        
+        print("Data Cleaning started")
+        data_cleaner = CleanData()
+        data_cleaner.header_footer_cleaner()
+        print("Data Cleaning ended")
 
         model_creator = ModelCreator()
         model_creator.create_and_save()
