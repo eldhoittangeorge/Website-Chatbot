@@ -13,6 +13,7 @@ class DataSpider(CrawlSpider):
         print("Collect data started")
         super(DataSpider, self).__init__(*args, **kwargs)
         self.data_etl = DataETL()
+        self.xpath_tag = self._create_crawler_tags()
 
 
     name = config.CRAWLER_NAME 
@@ -21,9 +22,16 @@ class DataSpider(CrawlSpider):
     rules = (Rule(LinkExtractor(), callback="parse"),)
 
 
+    def _create_crawler_tags(self):
+        xpath_tag = ""
+        for tag in config.CRAWLER_HTML_TAGS:
+            xpath_tag += f" //{tag}/text() |"
+        xpath_tag = xpath_tag[1:-1]
+        return xpath_tag
+
     def parse(self, response):
-        # data = response.xpath('//p/text() | //h1/text() | //h2/text() | //b/text() | //a/text()').extract()
-        data = response.xpath('//p/text()').extract()
+        data = response.xpath(self.xpath_tag).extract()
+        # rel_img_ulrs = response.xpath("//img/@src").extract()
         url = response.url
         self.data_etl.write_data_db({"data" : data, "url" : url}) 
         yield {}

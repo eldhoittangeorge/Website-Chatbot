@@ -4,6 +4,7 @@ from pymongo import MongoClient
 import math
 from collections import Counter
 import config
+import sys
 import re
 
 
@@ -51,6 +52,10 @@ class CleanData:
             id = document['_id']
             content = document["content"].replace(header_pattern, "", 1)
             content = content.replace(footer_pattern, "", 1).strip()
+
+            if(sys.getsizeof(content) <= 1500):
+                self.collection.delete_one({"_id":id})
+                continue
 
             update = {
                 "$set":{
