@@ -5,8 +5,6 @@ import { ChatContext } from "../context/ChatContext";
 const Result = () => {
   const { data } = useContext(ChatContext);
 
-  console.log("The data inside reesult", data.answers);
-
   const resultList = data.answers.map((result, index) => (
     <ResultItem result={result} key={index} />
   ));

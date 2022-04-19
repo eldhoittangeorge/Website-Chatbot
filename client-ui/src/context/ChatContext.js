@@ -9,9 +9,17 @@ const ChatProvider = ({ children }) => {
     question: "",
     answers: [],
     config: { name: "" },
+    loading: false,
   };
 
   const [chatState, dispatch] = useReducer(ChatReducer, initState);
+
+  const changeLoading = (status) => {
+    dispatch({
+      type: "MODIFY_LOADING",
+      payload: status,
+    });
+  };
 
   const addData = (data) => {
     dispatch({
@@ -42,6 +50,7 @@ const ChatProvider = ({ children }) => {
 
   const getAnswer = async (query) => {
     try {
+      changeLoading(true);
       const response = await axios.get("http://127.0.0.1:5000/api", {
         params: { query: query },
       });
@@ -51,6 +60,7 @@ const ChatProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
+    changeLoading(false);
   };
 
   const getConfigData = async () => {

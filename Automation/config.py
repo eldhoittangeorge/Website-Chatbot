@@ -10,10 +10,8 @@ CRAWLER_CONFIG = {
 CRAWLER_SETTINGS = {
     "DEPTH_LIMIT":1,
     "LOG_LEVEL": "INFO",
-    "IMAGE_STORE": "images",
-    "ITEM_PIPELINES": {'scrapy.pipelines.images.ImagePipeline': 1}
 }
-CRAWLER_HTML_TAGS = ["p", "a"]
+CRAWLER_HTML_TAGS = ["p"]
 
 
 MONGODB_URI = "mongodb://localhost:27017"
