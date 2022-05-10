@@ -2,15 +2,23 @@ import re
 import sys 
 import pymongo
 import logging
-import config
+# import config
+from configparser import ConfigParser
 from pymongo import MongoClient
 
 class DataETL:
 
     def __init__(self):
-        self.client = MongoClient(config.MONGODB_URI)
-        self.db = self.client[config.MONOGODB_DATABASE]
-        self.collection = self.db[config.CRAWLER_NAME]
+
+        self.config = ConfigParser()
+        self.config.read("config.ini")
+        self.client = MongoClient(self.config.get("Database", "mongodb_uri"))
+        self.db= self.client[self.config.get("Database", "mongodb_database")]
+        self.collection = self.db[self.config.get("Crawler", "crawler_name")]
+        # self.client = MongoClient(config.MONGODB_URI)
+        # self.client = MongoClient(config.MONGODB_URI)
+        # self.db = self.client[config.MONOGODB_DATABASE]
+        # self.collection = self.db[config.CRAWLER_NAME]
 
     def _clean_data(self, data):
         data = data.strip()
@@ -25,7 +33,7 @@ class DataETL:
         url = data["url"]
 
         if(sys.getsizeof(content) <= 3000):
-            logging.info("The data is here") 
+            # logging.info("The data is here") 
             return
         
         document = {

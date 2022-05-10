@@ -4,14 +4,13 @@ import { ChatContext } from "../context/ChatContext";
 
 function Header() {
   const { data } = useContext(ChatContext);
-  const { name, website } = data.config;
+  const { name, website, date } = data.config;
 
   return (
     <div>
       <h1 className="heading">Chatbot Demo - Explore {name}</h1>
       <p className="text">
-        This demo takes its data from MITS website({website}) crawled on
-        December 2021
+        This demo takes its data from MITS website({website}) crawled on {date}
       </p>
       <p className="text noteText">
         <i>Note. Do not use keywords, but full fledged question</i>

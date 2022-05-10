@@ -1,6 +1,7 @@
-from py import process
 import scrapy 
-import config
+# import config
+import ast
+from configparser import ConfigParser
 from SiteDataETL import DataETL
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.crawler import CrawlerProcess
@@ -9,6 +10,9 @@ from scrapy.linkextractors import LinkExtractor
 
 class DataSpider(CrawlSpider):
 
+    config = ConfigParser()
+    config.read("config.ini")
+
     def __init__(self, *args, **kwargs):
         print("Collect data started")
         super(DataSpider, self).__init__(*args, **kwargs)
@@ -16,15 +20,17 @@ class DataSpider(CrawlSpider):
         self.xpath_tag = self._create_crawler_tags()
 
 
-    name = config.CRAWLER_NAME 
-    start_urls = config.CRAWLER_CONFIG["start_urls"]
-    allowed_domains = config.CRAWLER_CONFIG["allowed_domains"]
+    
+    name = config.get("Crawler","crawler_name")
+    start_urls = ast.literal_eval(config.get("Crawler", "crawler_config"))["start_urls"]
+    allowed_domains = ast.literal_eval(config.get("Crawler", "crawler_config"))["allowed_domains"]
     rules = (Rule(LinkExtractor(), callback="parse"),)
 
 
     def _create_crawler_tags(self):
         xpath_tag = ""
-        for tag in config.CRAWLER_HTML_TAGS:
+        tags = ast.literal_eval(self.config.get("Crawler","crawler_html_tag"))
+        for tag in tags:
             xpath_tag += f" //{tag}/text() |"
         xpath_tag = xpath_tag[1:-1]
         return xpath_tag

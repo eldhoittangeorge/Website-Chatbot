@@ -4,16 +4,22 @@ from haystack.nodes import DensePassageRetriever
 from haystack.pipelines import ExtractiveQAPipeline
 from pymongo import MongoClient
 from haystack.schema import Document
-import config
+# import config
+from configparser import ConfigParser
 
 
 class ModelCreator():
 
     def __init__(self) -> None:
         print("Initailization started")
-        self.client = MongoClient(config.MONGODB_URI)
-        self.db = self.client[config.MONOGODB_DATABASE]
-        self.collection = self.db[config.CRAWLER_NAME]
+        self.config = ConfigParser()
+        self.config.read("config.ini")
+        self.client = MongoClient(self.config.get("Database", "mongodb_uri"))
+        self.db= self.client[self.config.get("Database", "mongodb_database")]
+        self.collection = self.db[self.config.get("Crawler", "crawler_name")]
+        # self.client = MongoClient(config.MONGODB_URI)
+        # self.db = self.client[config.MONOGODB_DATABASE]
+        # self.collection = self.db[config.CRAWLER_NAME]
         self.documents = self.load_documents()
         self.document_store = FAISSDocumentStore(faiss_index_factory_str="Flat")
         self.pipeline = None

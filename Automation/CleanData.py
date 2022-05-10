@@ -3,7 +3,8 @@ import pymongo
 from pymongo import MongoClient
 import math
 from collections import Counter
-import config
+# import config
+from configparser import ConfigParser
 import sys
 import re
 
@@ -11,9 +12,14 @@ import re
 class CleanData:
 
     def __init__(self):
-        self.db_client = MongoClient(config.MONGODB_URI)
-        self.db = self.db_client[config.MONOGODB_DATABASE]
-        self.collection = self.db[config.CRAWLER_NAME]
+        config = ConfigParser()
+        config.read("config.ini")
+        self.db_client = MongoClient(config.get("Database", "mongodb_uri"))
+        self.db= self.db_client[config.get("Database", "mongodb_database")]
+        self.collection = self.db[config.get("Crawler", "crawler_name")]
+        # self.db_client = MongoClient(config.MONGODB_URI)
+        # self.db = self.db_client[config.MONOGODB_DATABASE]
+        # self.collection = self.db[config.CRAWLER_NAME]
         self.contents = self._get_db_data()
 
 
