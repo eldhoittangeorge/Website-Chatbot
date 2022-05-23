@@ -12,6 +12,8 @@ document_store
 Models/Context Models/mlruns
 Models/Context Models/context_model_retriever_2/*
 Models/Context Models/Saved Models/*
+Models/Context Evaluation Model/mlruns
+Models/Context Evaluation Model/results
 Server/mlruns
 Models/Context Models/Data/*
 Server/src/mlruns/*
