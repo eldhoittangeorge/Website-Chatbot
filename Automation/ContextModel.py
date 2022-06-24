@@ -1,5 +1,6 @@
 from haystack.document_stores import FAISSDocumentStore
 from haystack.nodes import DensePassageRetriever, FARMReader
+from haystack.utils import print_answers
 from haystack.pipelines import ExtractiveQAPipeline
 
 class ContextModelClass():
@@ -14,12 +15,14 @@ class ContextModelClass():
     def predict(self, query):
         query = query.lower()
         prediction = self.pipeline.run(query=query)
+        print_answers(prediction)
         answers = []
         for answer in prediction['answers']:
             tmp = dict()
             tmp["document_id"] = answer.document_id
             tmp["result"] = answer.answer
             tmp["context"] = answer.context
+            tmp["source"] = answer.meta['source']
             answers.append(tmp)
 
         return {"query":prediction["query"], "answers":answers}
