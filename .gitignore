@@ -14,6 +14,8 @@ Models/Context Models/context_model_retriever_2/*
 Models/Context Models/Saved Models/*
 Models/Context Evaluation Model/mlruns
 Models/Context Evaluation Model/results
+Models/Context Evaluation Model/results_oversampling
+Models/Context Evaluation Model/results_undersampling
 Models/Context Evaluation Model/results_old
 Server/mlruns
 Models/Context Models/Data/*
