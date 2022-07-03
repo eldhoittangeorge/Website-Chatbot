@@ -1,4 +1,3 @@
-from lib2to3.pgen2.tokenize import tokenize
 from transformers import TextClassificationPipeline, AutoTokenizer, AutoModelForSequenceClassification
 import pandas as pd
 import numpy as np

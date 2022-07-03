@@ -51,7 +51,7 @@ const ChatProvider = ({ children }) => {
   const getAnswer = async (query) => {
     try {
       changeLoading(true);
-      const response = await axios.get("http://127.0.0.1:5000/api", {
+      const response = await axios.get("http://be8c-34-126-131-192.ngrok.io/api", {
         params: { query: query },
       });
       console.log("THe data inside context", response.data);
@@ -65,7 +65,7 @@ const ChatProvider = ({ children }) => {
 
   const getConfigData = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/config");
+      const response = await axios.get("http://be8c-34-126-131-192.ngrok.io/config");
       console.log("The config data is ", response.data);
       addConfigData(response.data);
     } catch (error) {
